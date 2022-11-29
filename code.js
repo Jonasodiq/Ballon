@@ -1,4 +1,4 @@
-// ordballong - mall 
+// ordballong - mall / word balloon - template
 
 /* setup
 ------------------------ */
@@ -9,11 +9,11 @@ const startButton = document.querySelector("#start");
 const stopButton = document.querySelector("#stop");
 
 
-/* klasser för att skapa objekt
+/* klasser för att skapa objekt /classes to create objects
 ------------------------ */
 ctx.font = "3rem Gerorgia";
 ctx.fillStyle = "white";
-ctx.fillText("Stava rätt och få poäng!", 200, 200, 500);
+ctx.fillText("Spell correctly and get points!", 200, 200, 500);
 
 class Ballon {
     constructor(word) {
@@ -51,53 +51,53 @@ class Ballon {
 /* initiera, globala variabler
 ------------------------ */
 
-// ord i spelet
-let words = ["grön", "glad", "vår", "sol", "sommar", "val", "himmel", "träd", "vatten", "ballong", "ledsen", "snygg", "päron", "kaka", "äpple", "klockan", "vinter", "mobile", "barn", "docka", "slut"];
+// ord i spelet / words in the game
+let words = ["green", "happy", "spring", "sun", "summer", "whale", "sky", "tree", "water", "balloon", "sad", "pretty", "pear ", "cake", "apple", "clock", "winter", "child", "doll", "end"];
 // array
 let ballons = [];
 
 // godkända tecken
 let chars = "abcdefghijklmnopqrstuvwxyzåäöABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ";
 
-// unikt id för varje frame i animationen
+// unikt id för varje frame i animationen / unique id for each frame in the animation
 let frameId;
 
 let word = words.pop();
 
-// text som skrivs
+// text som skrivs / text being written
 let text = "";
 
-// slumpa ordföljden
+// slumpa ordföljden / randomize the word order
 shuffleArray(words);
 
-//poäng
+//poäng / point
 let score = 0;
 
-/* händelselyssnare ------------------------ */
+/* händelselyssnare /event listener ------------------------ */
 
 startButton.addEventListener("click", function () {
 
-    // starta spel
+    // start spel
     nextFrame();
 
-    // inaktivera knapp
+    // inaktivera knapp / disable button
     startButton.setAttribute("disabled", true);
     spawnBallon();
 })
 
 stopButton.addEventListener("click", function () {
 
-    // pausa spel
+    // pausa spel / pause game
     cancelAnimationFrame(frameId);
 
-    // aktivera åter startknappen
+    // aktivera åter startknappen / activate the start button again
     startButton.removeAttribute("disabled");
 })
-// tangent
+// tangent / key
 document.addEventListener("keydown", getKeyDown, false);
 
 
-/* funktioner------------------------ */
+/* funktioner / functions ------------------------ */
 
 function getKeyDown(event) {
     //console.log(event);
@@ -107,11 +107,12 @@ function getKeyDown(event) {
     }
     if (event.code === "Enter" && text.length > 0) {
     // anropa en funktion som kontrollera om texten finns i en ordballong
+    // call a function that checks if the text is in a word balloon
         checkBallonMatch(text);
         text = "";
     }
     if (event.code === "Backspace") {
-        // radera sista tecknet i variabeln text
+        // radera sista tecknet i variabeln text / delete the last character in the variable text
         text = text.substring(0, text.length - 1);
     }
 }
@@ -121,10 +122,10 @@ function nextFrame() {
 
     frameId = requestAnimationFrame(nextFrame);
 
-    // radera innehåll från föregående frame
+    // radera innehåll från föregående frame / delete content from previous frame
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // anropa metoder och funktioner:
+    // anropa metoder och funktioner: call methods and functions:
     renderBallons();
     
     spawnBallon();
@@ -189,7 +190,7 @@ function renderResult() {
     ctx.fillText("Antal poäng: " +score, canvas.width / 2, canvas.height / 2, canvas.width);
 }
 
-// ljud
+// ljud / sound
 function playSound(file) {
     let audio = new Audio ();
     audio.src = file;
@@ -197,10 +198,10 @@ function playSound(file) {
 }
 
 
-// slumpa ett tal mellan två värden
+// slumpa ett tal mellan två värden / randomize a number between two values
 function getRandomBetween(min, max) {
 
-    // returnera heltal
+    // returnera heltal / return integer
     return Math.floor(Math.random() * (max - min) + min);
 
 }
