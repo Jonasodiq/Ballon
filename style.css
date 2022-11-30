@@ -1,37 +1,47 @@
+
 body {
+    position:relative ;
+    top: 8rem; left: 500px;
     background-color: rgba(22, 29, 58, 0.761);
 }
 
 h1 {
-    position:fixed ;
-    top: 0px; left: 350px;
+    position:absolute ;
+    top: -65px; left: 50px;
     color: rgb(46, 176, 199);
     font-size: 3rem;
     z-index: 9;
 }
 canvas {
-    position:relative ;
-    top: 55px; left: 100px;
     background-image: url(balloon.jpg);
     background-size: 900px;
-    border: 1px solid black;
+    border: 5px solid rgb(37, 27, 96);
 }
-
-#start {
-    position:relative ;
-    top: 55px; left: 100px;
+.button {
+    margin: 10px;
     background-color: green;
     color: white;
+    padding: 10px 20px;
+    border: 2px solid rgb(22, 30, 95);
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    display: inline-block;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.button:hover {
+    cursor: pointer;
+    background-color: rgb(5, 154, 5)
 }
 
 #stop {
-    position:relative ;
-    top: 55px; left: 100px;
-    background-color: red;
-    color: white;
+    background-color: rgb(216, 6, 6);
+}
+#stop:hover {
+    background-color: red
 }
 
-#sto
 .footer {
     min-height: 160px;
     display: flex;
@@ -42,6 +52,6 @@ canvas {
   }
   .footer__content {
     position:fixed ;
-    bottom: 40px; left: 300px;
+    bottom: 40px; left: 700px;
     color: #8c8c8c;
   }
