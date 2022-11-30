@@ -1,8 +1,47 @@
 body {
     background-color: rgba(22, 29, 58, 0.761);
 }
+
+h1 {
+    position:fixed ;
+    top: 0px; left: 350px;
+    color: rgb(46, 176, 199);
+    font-size: 3rem;
+    z-index: 9;
+}
 canvas {
+    position:relative ;
+    top: 55px; left: 100px;
     background-image: url(balloon.jpg);
     background-size: 900px;
     border: 1px solid black;
 }
+
+#start {
+    position:relative ;
+    top: 55px; left: 100px;
+    background-color: green;
+    color: white;
+}
+
+#stop {
+    position:relative ;
+    top: 55px; left: 100px;
+    background-color: red;
+    color: white;
+}
+
+#sto
+.footer {
+    min-height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+  }
+  .footer__content {
+    position:fixed ;
+    bottom: 40px; left: 300px;
+    color: #8c8c8c;
+  }
