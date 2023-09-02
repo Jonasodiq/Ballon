@@ -1,19 +1,31 @@
 
 body {
-    position:relative ;
-    top: 8rem; left: 500px;
+    /* position:relative ; */
+    /* top: 8rem; left: 50px; */
     background-color: rgba(22, 29, 58, 0.761);
 }
 
+.container {
+    position: absolute;
+    left: 10rem;
+    width: 800px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items:center
+}
+
 h1 {
-    position:absolute ;
-    top: -65px; left: 50px;
+    /* position:absolute ; */
+    /* top: -65px; left: 50px; */
     color: rgb(46, 176, 199);
     font-size: 3rem;
-    z-index: 9;
+    /* z-index: 9; */
 }
 canvas {
     background-image: url(balloon.jpg);
+    background-repeat: no-repeat;
     background-size: 900px;
     border: 5px solid rgb(37, 27, 96);
 }
@@ -50,8 +62,4 @@ canvas {
     position: relative;
 
   }
-  .footer__content {
-    position:fixed ;
-    bottom: 40px; left: 700px;
-    color: #8c8c8c;
-  }
+  .footer__content {color: #8c8c8c;}
