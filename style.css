@@ -1,7 +1,5 @@
 
 body {
-    /* position:relative ; */
-    /* top: 8rem; left: 50px; */
     background-color: rgba(22, 29, 58, 0.761);
 }
 
@@ -17,11 +15,8 @@ body {
 }
 
 h1 {
-    /* position:absolute ; */
-    /* top: -65px; left: 50px; */
     color: rgb(46, 176, 199);
     font-size: 3rem;
-    /* z-index: 9; */
 }
 canvas {
     background-image: url(balloon.jpg);
@@ -60,6 +55,6 @@ canvas {
     justify-content: center;
     align-items: center;
     position: relative;
-
   }
+  
   .footer__content {color: #8c8c8c;}
