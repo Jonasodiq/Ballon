@@ -1,38 +1,60 @@
 <!DOCTYPE html>
 <html lang="sv">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>Balloon</title>
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      href="/favicon-32x32.png"
+    />
 
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="style.css"
+    />
+  </head>
+  <body>
     <div class="container">
+      <div>
+        <h1>Balloon Game</h1>
+      </div>
 
-        <div>
-            <h1>Balloon Game</h1>
+      <canvas
+        width="800"
+        height="600"
+      ></canvas>
+      <div>
+        <button
+          class="button"
+          id="start"
+        >
+          Start
+        </button>
+        <button
+          class="button"
+          id="stop"
+        >
+          Stop
+        </button>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer__content">
+          All rights reserved &copy; Copyright 2021, Jonas Niyazson.
         </div>
-    
-        <canvas width="800" height="600"></canvas>
-        <div>
-            <button class="button" id="start">Start</button>
-            <button class="button" id="stop">Stop</button>    
-        </div>
-       
-        
-        <!-- Footer -->
-        <footer class="footer">
-                
-            <div class="footer__content">
-                All rights reserved &copy; Copyright 2021, Jonas Niyazson.
-            </div>
-    
-        </footer>
+      </footer>
     </div>
 
-
     <script src="code.js"></script>
-</body>
+  </body>
 </html>
