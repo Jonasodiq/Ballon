@@ -4,6 +4,8 @@
 
 sass --watch src/scss/style.scss style.css
 
+![Balloon Game](https://github.com/Jonasodiq/Ballon/blob/main/balloon-game.jpg)
+
 ### Description:
 
 **This app is a word-based game where the player is tasked with popping word balloons as they rise on the screen. Here's a brief description of the app's key features:**
