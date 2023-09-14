@@ -30,4 +30,4 @@ sass --watch src/scss/style.scss style.css
 
 **In summary, this app provides an entertaining word-based game where the player can test their vocabulary skills by popping word balloons before they reach the top of the screen.**
 
-### [Link to :balloon:](https://resplendent-smakager-80ad70.netlify.app/)
+### [Link to :balloon:](https://resplendent-baloon-game.netlify.app)
