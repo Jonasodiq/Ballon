@@ -21,7 +21,7 @@ class Ballon {
         this.radius = this.word.length * 10;
         this.x = getRandomBetween(100, canvas.width - 100);
         this.y = canvas.height + this.radius;
-        this.vy = -1;
+        this.vy = -3;
     }
     draw() {
         ctx.beginPath();
