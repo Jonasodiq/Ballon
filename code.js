@@ -52,7 +52,7 @@ class Ballon {
 ------------------------ */
 
 // ord i spelet / words in the game
-let words = ["green", "happy", "spring", "sun", "summer", "whale", "sky", "tree", "water", "balloon", "sad", "pretty", "pear ", "cake", "apple", "clock", "winter", "child", "doll", "end"];
+let words = ["green", "happy", "spring", "sun", "summer", "whale", "sky", "tree", "water", "balloon", "sad", "pretty", "pear", "cake", "apple", "clock", "winter", "child", "doll", "end"];
 // array
 let ballons = [];
 
@@ -141,7 +141,7 @@ function checkBallonMatch(text) {
         if (ballon.word === text) {
             ballon.word = "";
             score += 1;
-            ballon.vy -= 2;
+            ballon.vy -= 4;
             playSound("katching.mp3")
         }
     })
