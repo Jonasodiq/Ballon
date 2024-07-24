@@ -1,5 +1,3 @@
-// ordballong - mall / word balloon - template
-
 /* setup
 ------------------------ */
 const canvas = document.querySelector("canvas");
@@ -7,21 +5,20 @@ const ctx = canvas.getContext("2d");
 
 const startButton = document.querySelector("#start");
 const stopButton = document.querySelector("#stop");
-
+const restartButton = document.querySelector("#restart");
 
 /* klasser för att skapa objekt /classes to create objects
 ------------------------ */
-ctx.font = "3rem Gerorgia";
+ctx.font = "3rem Georgia";
 ctx.fillStyle = "white";
-ctx.fillText("Spell correctly and get points!", 200, 200, 500);
-
-class Ballon {
+ctx.fillText("Stava korrekt och få poäng!", 200, 200, 500);
+class Balloon {
     constructor(word) {
         this.word = word;
         this.radius = this.word.length * 10;
         this.x = getRandomBetween(100, canvas.width - 100);
         this.y = canvas.height + this.radius;
-        this.vy = -3;
+        this.vy = -1;
     }
     draw() {
         ctx.beginPath();
@@ -54,7 +51,7 @@ class Ballon {
 // ord i spelet / words in the game
 let words = ["green", "happy", "spring", "sun", "summer", "whale", "sky", "tree", "water", "balloon", "sad", "pretty", "pear", "cake", "apple", "clock", "winter", "child", "doll", "end"];
 // array
-let ballons = [];
+let balloons = [];
 
 // godkända tecken
 let chars = "abcdefghijklmnopqrstuvwxyzåäöABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ";
@@ -70,45 +67,51 @@ let text = "";
 // slumpa ordföljden / randomize the word order
 shuffleArray(words);
 
-//poäng / point
+// poäng / point
 let score = 0;
+
+// senaste tiden då en ballong spawnades / last time a balloon was spawned
+let lastSpawnTime = 0;
 
 /* händelselyssnare /event listener ------------------------ */
 
 startButton.addEventListener("click", function () {
-
     // start spel
     nextFrame();
-
     // inaktivera knapp / disable button
     startButton.setAttribute("disabled", true);
-    spawnBallon();
+    spawnBalloon();
 })
 
 stopButton.addEventListener("click", function () {
-
     // pausa spel / pause game
     cancelAnimationFrame(frameId);
-
     // aktivera åter startknappen / activate the start button again
     startButton.removeAttribute("disabled");
 })
+
+restartButton.addEventListener("click", function () {
+    // återställ spelet / reset game
+    resetGame();
+    // starta spelet igen / start the game again
+    nextFrame();
+    // inaktivera startknappen / disable start button
+    startButton.setAttribute("disabled", true);
+})
+
 // tangent / key
 document.addEventListener("keydown", getKeyDown, false);
-
 
 /* funktioner / functions ------------------------ */
 
 function getKeyDown(event) {
-    //console.log(event);
-
     if (chars.indexOf(event.key) >= 0) {
         text += event.key;
     }
     if (event.code === "Enter" && text.length > 0) {
-    // anropa en funktion som kontrollera om texten finns i en ordballong
-    // call a function that checks if the text is in a word balloon
-        checkBallonMatch(text);
+        // anropa en funktion som kontrollerar om texten finns i en ordballong
+        // call a function that checks if the text is in a word balloon
+        checkBalloonMatch(text);
         text = "";
     }
     if (event.code === "Backspace") {
@@ -118,52 +121,47 @@ function getKeyDown(event) {
 }
 
 // animering, game loop
-function nextFrame() {
-
+function nextFrame(timestamp) {
     frameId = requestAnimationFrame(nextFrame);
 
     // radera innehåll från föregående frame / delete content from previous frame
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // anropa metoder och funktioner: call methods and functions:
-    renderBallons();
+    renderBalloons();
     
-    spawnBallon();
+    // kontrollera tiden och spawn ballonger / check time and spawn balloons
+    if (timestamp - lastSpawnTime > 4000) { // spawn varannan sekund
+        spawnBalloon();
+        lastSpawnTime = timestamp;
+    }
     
     renderText();
-
     renderScore();
 }
 
-function checkBallonMatch(text) {
-    ballons.forEach(ballon => {
-
-        if (ballon.word === text) {
-            ballon.word = "";
+function checkBalloonMatch(text) {
+    balloons.forEach(balloon => {
+        if (balloon.word === text) {
             score += 1;
-            ballon.vy -= 4;
-            playSound("katching.mp3")
+            balloon.vy -= 4; // Öka hastigheten på ballongen
+            playSound("katching.mp3");
         }
-    })
+    });
 }
 
-function renderBallons() {
-    ballons.forEach(ballon => {
-    ballon.move();
+function renderBalloons() {
+    balloons.forEach(balloon => {
+        balloon.move();
     }) 
 }
 
-function spawnBallon() {
+function spawnBalloon() {
     if (words.length > 0) {
-
-        if (frameId % 240 === 0) {
-            let word = words.pop();
-            let ballon = new Ballon(word);
-            ballons.push(ballon); 
-        }   
-    }
-
-    else {
+        let word = words.pop();
+        let balloon = new Balloon(word);
+        balloons.push(balloon); 
+    } else {
         cancelAnimationFrame(frameId);
         renderResult();
     }
@@ -187,27 +185,35 @@ function renderResult() {
     ctx.font = "50px sans-serif";
     ctx.textAlign = "center";
     ctx.fillStyle = "white";
-    ctx.fillText("Antal poäng: " +score, canvas.width / 2, canvas.height / 2, canvas.width);
+    ctx.fillText("Antal poäng: " + score, canvas.width / 2, canvas.height / 2, canvas.width);
+}
+
+// återställ spelet / reset game
+function resetGame() {
+    cancelAnimationFrame(frameId);
+    balloons = [];
+    words = ["green", "happy", "spring", "sun", "summer", "whale", "sky", "tree", "water", "balloon", "sad", "pretty", "pear", "cake", "apple", "clock", "winter", "child", "doll", "end"];
+    shuffleArray(words);
+    score = 0;
+    text = "";
+    lastSpawnTime = 0;
 }
 
 // ljud / sound
 function playSound(file) {
-    let audio = new Audio ();
+    let audio = new Audio();
     audio.src = file;
     audio.play();
 }
 
-
 // slumpa ett tal mellan två värden / randomize a number between two values
 function getRandomBetween(min, max) {
-
     // returnera heltal / return integer
     return Math.floor(Math.random() * (max - min) + min);
-
 }
+
 // algoritm shuffleArray
 function shuffleArray(array) {
-
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
         var temp = array[i];
